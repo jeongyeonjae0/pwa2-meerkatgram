@@ -13,9 +13,12 @@ export default function validationHandler(req, res, next) {
 
   // 에러 발생 여부 확인 
   if(!errors.isEmpty()) {
-    // 에러 처리
+    // express validation error custom
+    const customerrors = errors.formatWith(error => `${error.path}: ${error.msg}`);
+
+    // 에러 응답
+    return res.status(BAD_REQUEST_ERROR.status).send(createBaseResponse(BAD_REQUEST_ERROR, customerrors.array()));
   }
-  return res.status(BAD_REQUEST_ERROR.status).send(createBaseResponse(BAD_REQUEST_ERROR, errors.array()));
 
   next();
 };

@@ -37,7 +37,7 @@ meerkatgram/
 │   │   ├── services/           # 비즈니스 로직 레이어
 │   │   └── utils/              # 유틸
 │   ├── configs/                # 전역 설정 파일 (DB, JWT, OAuth, Push 등)
-│   ├── database/           # 데이터베이스 관련
+│   ├── databases/          # 데이터베이스 관련
 │   │   ├── migrations/         # 마이그레이션 (DB 스키마 작성 파일 등)
 │   │   └── seeders/            # 시더 (DB 더미 데이터 생성 파일 등)
 │   ├── routes/             # API 엔드포인트 정의
