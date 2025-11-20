@@ -10,7 +10,7 @@ import { DataTypes } from 'sequelize';
 const tableName = 'comments';
 
 // 컬럼 정의
-const attributs = {
+const attributes = {
   id: {
     field: 'id',
     type: DataTypes.BIGINT.UNSIGNED,
@@ -71,7 +71,7 @@ const options = {
 export default {
   // 마이그레이션 실행 시 호출되는 메소드 (스키마 생성, 수정)
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable(tableName, attributs, options);
+    await queryInterface.createTable(tableName, attributes, options);
   },
 
   // 마이그레이션을 롤백 시 호출되는 메소드(스키마 제거, 수정)

@@ -13,7 +13,7 @@ const tableName = 'notifications';
 const key = 'is_read';
 
 // 컬럼 정의
-const upAttributs = {
+const upAttributes = {
   type: DataTypes.BOOLEAN,
   allowNull: false,
   defaultValue: false,
@@ -32,7 +32,7 @@ export default {
   // 마이그레이션 실행 시 호출되는 메소드 (스키마 생성, 수정)
   async up (queryInterface, Sequelize) {
     // 컬럼 수정: queryInterface.changeColumn(tableName, key, attributes, options)
-    await queryInterface.changeColumn(tableName, key, upAttributs);
+    await queryInterface.changeColumn(tableName, key, upAttributes);
   },
 
   // 마이그레이션을 롤백 시 호출되는 메소드(스키마 제거, 수정)
