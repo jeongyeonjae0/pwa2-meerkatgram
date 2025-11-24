@@ -83,7 +83,7 @@ const PushSubscription = {
     return define;
   },
   associate: (db) => {
-    db.PushSubscription.belongTo(db.User, { tragetKey: 'id', foreignKey: 'userId', as: 'pushsub-belongs-to-user'});
+    db.PushSubscription.belongsTo(db.User, { tragetKey: 'id', foreignKey: 'userId', as: 'pushsub-belongs-to-user'});
   }
 }
 

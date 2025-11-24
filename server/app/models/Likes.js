@@ -82,8 +82,8 @@ const Like = {
     return define;
   },
   associate: (db) => {
-    db.Like.belongTo(db.User, { tragetKey: 'id', foreignKey: 'userId', as: 'like-belongs-to-user'});
-    db.Like.belongTo(db.Post, { targetKey: 'id', foreignKey: 'postId', as: 'like-belongs-to-post'});
+    db.Like.belongsTo(db.User, { tragetKey: 'id', foreignKey: 'userId', as: 'like-belongs-to-user'});
+    db.Like.belongsTo(db.Post, { targetKey: 'id', foreignKey: 'postId', as: 'like-belongs-to-post'});
   }
 }
 
