@@ -6,6 +6,9 @@
 
 import bcrypt from 'bcrypt';
 import userRepository from "../repositories/user.repository.js";
+import myError from '../errors/customs/my.error.js';
+import { NOT_REGISTERD_ERROR } from '../../configs/responseCode.config.js';
+
 
 async function login(body) {
   const { email , password } = body;
@@ -15,12 +18,13 @@ async function login(body) {
 
   // 유저 존재 여부 체크 
   if(!result) {
-    throw new Error('유저 없음');
+    throw myError('유저 미존재', NOT_REGISTERD_ERROR);
   }
 
   // 비밀번호 체크
   if(!bcrypt.compareSync(password, result.password)) {
-    throw new Error('비밀번호 틀림');
+    // throw new Error('비밀번호 틀림'); // codeInfo가 없는 객체 => 시스템 에러를 반환 
+    throw myError('비밀번호 틀림', NOT_REGISTERD_ERROR);
   }
 
   return result;
