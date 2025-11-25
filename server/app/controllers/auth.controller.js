@@ -6,6 +6,7 @@
 
 import { SUCCESS } from "../../configs/responseCode.config.js";
 import authService from "../services/auth.service.js";
+import cookieUtil from "../utils/cookie/cookie.util.js";
 import { createBaseResponse } from "../utils/createBaseResponse.util.js";
 
 // --------------------
@@ -17,14 +18,18 @@ import { createBaseResponse } from "../utils/createBaseResponse.util.js";
  * @param {import("express").Response} res - Response 객체
  * @param {import("express").NextFunction} next - NextFunction 객체
  */
+
 async function login(req, res, next) {
   try {
     const body = req.body; // 파라미터 획득
 
     // 로그인 서비스 호출 
-    const result = await authService.login(body);
-  
-    res.status(SUCCESS.status).send(createBaseResponse(SUCCESS, result));
+    const { accessToken, refreshToken, user } = await authService.login(body);
+
+    // Cookie에 RefreshToken 설정
+    cookieUtil.setCookieRefreshToken(res, refreshToken);
+
+    res.status(SUCCESS.status).send(createBaseResponse(SUCCESS, {accessToken, user}));
   } catch (error) {
     next(error);
   }
