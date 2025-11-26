@@ -30,7 +30,7 @@ export default {
         password: await bcrypt.hash('qwe12312', 10),
         nick: '미어캣관리자2',
         provider: 'KAKAO',
-        role: 'NOMAL',
+        role: 'NORMAL',
         profile: '',
         created_at: new Date(),
         updated_at: new Date(),
