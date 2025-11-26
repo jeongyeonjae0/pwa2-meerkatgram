@@ -1,0 +1,26 @@
+.post-create-container {
+  padding: 50px 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.post-create-textarea {
+  padding: 10px;
+  border-radius: 10px;
+  resize: none;
+  width: 100%;
+  max-width: 500px;
+  height: 300px;
+}
+
+.post-create-image {
+  width: 100%;
+  max-width: 500px;
+  height: 500px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+}

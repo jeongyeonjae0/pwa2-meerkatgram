@@ -1,68 +1,169 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+* {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+:root {
+  /* variables */
+  --primary-color-dark: #000000;
+  --primary-color-gray: #434343;
+  --primary-color-light: #ffffff;
+  --primary-color-heart: #ea2027;
+  --primary-color-link: #008cff;
+  --primary-line: 1px solid var(--primary-color-gray);
 }
 
+#root {
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* 버튼 관련 */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.btn-full-width {
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+}
+
+.btn-big {
+  width: 300px;
+  height: 70px;
+  font-size: 50px;
+}
+
+.btn-medium {
+  width: 120px;
+  height: 60px;
+  font-size: 35px;
+}
+
+.btn-small {
+  width: 90px;
+  height: 40px;
+  font-size: 20px;
+}
+
+/* 배경 관련 */
+.bg-dark {
+  background-color: var(--primary-color-dark);
+  color: var(--primary-color-light);
+}
+
+.bg-gray {
+  background-color: var(--primary-color-gray);
+  color: var(--primary-color-light);
+}
+
+.bg-light {
+  background-color: var(--primary-color-light);
+  color: var(--primary-color-dark);
+}
+
+.bg-img-kakao {
+  background-image: url("/icons/kakao.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* 프로필 관련 */
+.profile {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+}
+
+.profile-medium {
+  width: 100px;
+  height: 100px;
+}
+
+.profile-small {
+  width: 50px;
+  height: 50px;
+}
+
+/* 절취선 */
+.bottom-line {
+  border-bottom: var(--primary-line);
+}
+
+/* 텍스트 있는 절취선 */
+.text-on-line {
+  min-width: 320px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--primary-color-gray);
+  font-size: 30px;
+}
+
+.text-on-line::before,
+.text-on-line::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--primary-color-gray);
+}
+
+/* input 관련 */
+.input-big-border {
+  padding: 0 10px;
+  width: 300px;
+  height: 70px;
+  font-size: 25px;
+  border-radius: 10px;
+}
+
+.input-medium {
+  padding: 0 10px;
+  width: 300px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+/* 하트 관련 */
+.icon-heart-fill {
+  background-image: url('http://localhost:5173/icons/heart-fill.png');
+  width: 30px;
+  height: 30px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.icon-heart-empty {
+  background-image: url('http://localhost:5173/icons/heart-empty.png');
+  width: 30px;
+  height: 30px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+/* 삭제 아이콘 */
+.icon-delete {
+  background-image: url('http://localhost:5173/icons/btn-delete.png');
+  width: 25px;
+  height: 30px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+/* 링크 */
+.link {
+  color: var(--primary-color-link);
+  cursor: pointer;
 }

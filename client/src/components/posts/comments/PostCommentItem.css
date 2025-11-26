@@ -1,0 +1,18 @@
+.post-comment-item-box {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 5px;
+}
+
+/* 코멘트 아이템 */
+.post-comment-item-comment {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* 코멘트 작성 유저명 */
+.post-comment-item-item-nick {
+  font-weight: 700;
+}

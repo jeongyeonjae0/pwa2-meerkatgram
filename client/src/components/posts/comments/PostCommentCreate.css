@@ -1,0 +1,26 @@
+/* 댓글 작성 박스 */
+.post-comment-create-box {
+  padding: 2px 5px;
+  display: grid;
+  grid-template-columns: 1fr 35px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  gap: 5px;
+}
+
+/* 댓글 작성 인풋 */
+.post-comment-create-input-add {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 20px;
+}
+
+/* 댓글 작성 버튼 */
+.post-comment-create-btn-add {
+  width: 30px;
+  height: 30px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

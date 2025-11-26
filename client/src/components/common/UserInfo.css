@@ -1,0 +1,45 @@
+.user-info-container {
+  margin: auto;
+  padding: 10px;
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.user-info-controll-box {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.user-info-stat-name {
+  font-weight: 700;
+}
+
+.user-info-stat-etc {
+  font-size: 13px;
+}
+
+.user-info-btn-items {
+  min-width: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-info-btn {
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+@media (min-width: 700px) {
+  .user-info-controll-box {
+    flex-direction: row;
+    gap: 30px;
+  }
+}

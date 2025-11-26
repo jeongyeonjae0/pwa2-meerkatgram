@@ -1,0 +1,50 @@
+.post-show-container {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* 포스트 상세 박스 */
+.post-show-post-box {
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* 포스트 이미지 */
+.post-show-post-img {
+  width: 100%;
+  max-width: 700px;
+}
+
+/* 포스트 내용 출력 관련 */
+.post-show-post-info-items {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* 좋아요 출력 관련 */
+.post-show-post-likes-items {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* 내용 출력 */
+.post-show-post-constent {
+  width: 100%;
+  resize: none;
+  outline: none;
+  border: none;
+  overflow: hidden;
+  word-wrap: break-word;
+  field-sizing: content; /* 텍스트 길이만큼 자동 height조절, 일부 브라우저 적용 안됨(JS로 구현하는게 안전함) */
+}

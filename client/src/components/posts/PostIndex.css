@@ -1,0 +1,28 @@
+.post-index-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.post-index-card-box {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.post-index-card {
+  padding: 50%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+}
+
+@media (min-width: 600px) {
+  .post-index-card-box {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
