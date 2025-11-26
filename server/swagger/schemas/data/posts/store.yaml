@@ -1,0 +1,108 @@
+tags:
+  - 게시글
+summary: 작성
+description: 작성
+operationId: 'post-store'
+parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+      example: 'bearer eyJhbGciOiJzaGEyNTYiL...'
+    required: true
+    description: 엑세스 토큰
+requestBody:
+  description: 작성 정보
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          title:
+            description: 게시글 제목
+            type: string
+            example: 게시글 제목11
+          content:
+            description: 게시글 내용
+            type: string
+            example: 게시글 내용11
+          image:
+            description: 게시글 사진
+            type: string
+            example: http://localhost:3000/file/posts/we4h6se547h5dgb5yagb.png
+responses:
+  '200':
+    description: 성공
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            code:
+              description: 코드
+              type: string
+              example: '00'
+            msg:
+              description: 메세지
+              type: string
+              example: 정상 처리
+            data:
+              properties:
+                posts:
+                  description: 게시글 정보
+                  type: object
+                  properties: 
+                    id:
+                      description: PK
+                      type: integer
+                      example: 1
+                    title:
+                      description: 게시글 제목
+                      type: string
+                      example: 게시글 제목11
+                    content:
+                      description: 게시글 내용
+                      type: string
+                      example: 게시글 내용11
+                    image:
+                      description: 게시글 사진
+                      type: string
+                      example: http://localhost:3000/file/posts/we4h6se547h5dgb5yagb.png
+                    created_at:
+                      description: 작성일
+                      type: string
+                      format: date-time
+                      example: 2024-05-20 15:02:52
+                    updated_at:
+                      description: 수정일
+                      type: string
+                      format: date-time
+                      example: 2024-05-21 18:26:28
+                    deleted_at:
+                      description: 삭제일
+                      type: string
+                      nullable: true
+                      example: null
+  '400':
+    description: 유효성 검사 에러
+    content:
+      application/json:
+        schema:
+          $ref: '../../errors/BadRequest.yaml'
+  '401':
+    description: 권한 에러
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: '../../errors/Unauthorized.yaml'
+            - $ref: '../../errors/ExpiredToken.yaml'
+            - $ref: '../../errors/InvalidToken.yaml'
+  '500':
+    description: DB 에러 및 시스템 에러
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: '../../errors/Db.yaml'
+            - $ref: '../../errors/System.yaml'

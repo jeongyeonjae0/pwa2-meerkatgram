@@ -1,0 +1,13 @@
+type: object
+required:
+  - code
+  - msg
+properties:
+  code:
+    description: 코드
+    type: string
+    example: E06
+  msg:
+    description: 메세지
+    type: string
+    example: 유효한 토큰이 아닙니다.

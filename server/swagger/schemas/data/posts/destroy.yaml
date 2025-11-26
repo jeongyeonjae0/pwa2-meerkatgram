@@ -1,0 +1,61 @@
+tags:
+  - 게시글
+summary: 삭제
+description: 게시글 삭제
+operationId: 'post-destroy'
+parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+      example: 'bearer eyJhbGciOiJzaGEyNTYiL...'
+    required: true
+    description: 엑세스 토큰
+  - in: path
+    name: id
+    schema:
+      type: integer
+    required: true
+    description: 게시글 PK
+responses:
+  '200':
+    description: 성공
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            code:
+              description: 코드
+              type: string
+              example: '00'
+            msg:
+              description: 메세지
+              type: string
+              example: 정상 처리
+  '400':
+    description: 유효성 검사 에러
+    content:
+      application/json:
+        schema:
+          $ref: '../../errors/BadRequest.yaml'
+  '403':
+    description: 권한 에러
+    content:
+      application/json:
+        schema:
+          $ref: '../../errors/Forbidden.yaml'
+  '409':
+    description: 유저 불일치 에러
+    content:
+      application/json:
+        schema:
+          $ref: '../../errors/UnmatchingUser.yaml'
+  '500':
+    description: DB 에러 및 시스템 에러
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: '../../errors/Db.yaml'
+            - $ref: '../../errors/System.yaml'

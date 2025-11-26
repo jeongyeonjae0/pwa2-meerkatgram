@@ -1,0 +1,13 @@
+type: object
+required:
+  - code
+  - msg
+properties:
+  code:
+    description: 코드
+    type: string
+    example: E05
+  msg:
+    description: 메세지
+    type: string
+    example: 만료된 토큰입니다.

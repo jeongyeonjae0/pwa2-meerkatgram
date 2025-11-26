@@ -1,0 +1,77 @@
+tags:
+  - 유저
+summary: 작성
+description: 작성
+operationId: 'user-store'
+parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+      example: 'bearer eyJhbGciOiJzaGEyNTYiL...'
+    required: true
+    description: 엑세스 토큰
+requestBody:
+  description: 회원 가입 정보
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          email:
+            description: 회원 아이디
+            type: string
+            example: admin@admin.com
+          password:
+            description: 비밀번호
+            type: string
+            example: qwe123!@
+          passwordChk:
+            description: 비밀번호 체크
+            type: string
+            example: qwe123!@
+          nick:
+            description: 닉네임
+            type: string
+            example: Kanna_Kamui
+          profile:
+            description: 프로필 사진
+            type: string
+            example: http://localhost:3000/file/profile/we4h6se547h5dgb5yagb.png
+responses:
+  '200':
+    description: 성공
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            code:
+              description: 코드
+              type: string
+              example: '00'
+            msg:
+              description: 메세지
+              type: string
+              example: 인증 완료
+  '400':
+    description: 유효성 검사 에러
+    content:
+      application/json:
+        schema:
+          $ref: '../../errors/BadRequest.yaml'
+  '409':
+    description: 이미 가입 된 회원
+    content:
+      application/json:
+        schema:
+          $ref: '../../errors/Conflict.yaml'
+  '500':
+    description: DB 에러 및 시스템 에러
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: '../../errors/Db.yaml'
+            - $ref: '../../errors/System.yaml'

@@ -1,0 +1,13 @@
+type: object
+required:
+  - code
+  - msg
+properties:
+  code:
+    description: 코드
+    type: string
+    example: E08
+  msg:
+    description: 메세지
+    type: string
+    example: 로그인한 유저로는 수행할 수 없는 작업입니다.

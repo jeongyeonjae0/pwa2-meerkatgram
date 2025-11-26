@@ -1,0 +1,69 @@
+tags:
+  - 파일 업로드
+summary: 프로필 이미지 업로드
+description: 프로필 이미지 업로드
+operationId: 'file-profile'
+parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+      example: 'bearer eyJhbGciOiJzaGEyNTYiL...'
+    required: true
+    description: 엑세스 토큰
+requestBody:
+  description: 이미지 업로드 정보
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          image:
+            description: 이미지
+            type: string
+            format: binary
+responses:
+  '200':
+    description: 성공
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            code:
+              description: 코드
+              type: string
+              example: '00'
+            msg:
+              description: 메세지
+              type: string
+              example: 정상 처리
+            data:
+              properties:
+                'path':
+                  description: 파일 경로
+                  type: string
+                  example: http://localhost:3000/files/profiles/we4h6se547h5dgb5yagb.png
+  '400':
+    description: 유효성 검사 에러
+    content:
+      application/json:
+        schema:
+          $ref: '../../errors/BadFile.yaml'
+  '401':
+    description: 권한 에러
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: '../../errors/Unauthorized.yaml'
+            - $ref: '../../errors/ExpiredToken.yaml'
+            - $ref: '../../errors/InvalidToken.yaml'
+  '500':
+    description: DB 에러 및 시스템 에러
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: '../../errors/Db.yaml'
+            - $ref: '../../errors/System.yaml'

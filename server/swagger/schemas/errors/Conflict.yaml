@@ -1,0 +1,13 @@
+type: object
+required:
+  - code
+  - msg
+properties:
+  code:
+    description: 코드
+    type: string
+    example: E07
+  msg:
+    description: 메세지
+    type: string
+    example: 이미 가입 된 회원입니다.

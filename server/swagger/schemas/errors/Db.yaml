@@ -1,0 +1,13 @@
+type: object
+required:
+  - code
+  - msg
+properties:
+  code:
+    description: 코드
+    type: string
+    example: E80
+  msg:
+    description: 메세지
+    type: string
+    example: 서비스 제공 상태가 원활하지 않습니다.

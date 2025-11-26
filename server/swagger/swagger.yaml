@@ -1,0 +1,73 @@
+openapi: 3.0.0
+info:
+  title: meerkatgram
+  version: '1.0.0'
+  description: |
+    에러 코드 표
+    | Name                  | status | code | info                      |
+    | --------------------- | ------ | ---- | ------------------------- |
+    | SUCCESS               | 200    | 00   | 정상 처리                     |
+    | NOT_REGISTERED_ERROR  | 400    | E01  | 아이디나 비밀번호가 틀렸습니다.         |
+    | UNAUTHORIZED_ERROR    | 401    | E02  | 로그인이 필요한 서비스입니다.          |
+    | FORBIDDEN_ERROR       | 403    | E03  | 권한이 부족하여 제공할 수 없는 서비스입니다. |
+    | EXPIRED_TOKEN_ERROR   | 401    | E05  | 만료된 토큰입니다.                |
+    | INVALID_TOKEN_ERROR   | 401    | E06  | 유효한 토큰이 아닙니다.             |
+    | CONFLICT_ERROR        | 409    | E07  | 이미 가입 된 회원입니다.            |
+    | UNMATCHING_USER_ERROR | 403    | E08  | 로그인한 유저로는 수행할 수 없는 작업입니다. |
+    | REISSUE_ERROR         | 401    | E09  | 재발급 불가능합니다.               |
+    | NOT_FOUND_ERROR       | 404    | E20  | 제공되지 않는 서비스입니다.           |
+    | BAD_REQUEST_ERROR     | 400    | E21  | 요청 파라미터에 이상이 있습니다.        |
+    | BAD_FILE_ERROR        | 400    | E22  | 파일은 필수(10MB이하)입니다.        |
+    | DB_ERROR              | 500    | E80  | 서비스 제공 상태가 원활하지 않습니다.     |
+    | SYSTEM_ERROR          | 500    | E99  | 서비스 제공 상태가 원활하지 않습니다.     |
+
+
+paths:
+  #########################################################################
+  # Auth 정의
+  #########################################################################
+  /api/auth/login:
+    post:
+      $ref: './schemas/data/auth/login.yaml'
+  /api/auth/reissue:
+    post:
+      $ref: './schemas/data/auth/reissue.yaml'
+  #########################################################################
+  # Posts 정의
+  #########################################################################
+  /api/posts:
+    get:
+      $ref: './schemas/data/posts/index.yaml'
+    post:
+      $ref: './schemas/data/posts/store.yaml'
+  /api/posts/{id}:
+    get:
+      $ref: './schemas/data/posts/show.yaml'
+    delete:
+      $ref: './schemas/data/posts/destroy.yaml'
+  #########################################################################
+  # File Upload 정의
+  #########################################################################
+  /api/files/posts:
+    post:
+      $ref: './schemas/data/files/post.yaml'
+  /api/files/profiles:
+    post:
+      $ref: './schemas/data/files/profile.yaml'
+  #########################################################################
+  # Comments 정의
+  #########################################################################
+  /api/comments/{id}/{commentId}:
+    get:
+      $ref: './schemas/data/comments/index.yaml'
+  /api/comments:
+    post:
+      $ref: './schemas/data/comments/store.yaml'
+  #########################################################################
+  # Users 정의
+  #########################################################################
+  /api/users:
+    post:
+      $ref: './schemas/data/users/store.yaml'
+    put:
+      $ref: './schemas/data/users/update.yaml'
