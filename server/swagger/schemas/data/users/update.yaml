@@ -66,7 +66,7 @@ responses:
                 role:
                   description: 권한
                   type: string
-                  example: NORMAL
+                  example: NOMAL
                 profile:
                   description: 프로필 사진
                   type: string

@@ -68,6 +68,39 @@ responses:
                   type: string
                   nullable: true
                   example: null
+                comments:
+                  type: array
+                  items:
+                    description: 코멘트 정보
+                    type: object
+                    properties:
+                      id:
+                        description: PK
+                        type: integer
+                        example: 1
+                      content:
+                        description: 코멘트 내용
+                        type: string
+                        example: 코멘트 내용11
+                      replyId:
+                        description: 대댓글 번호
+                        type: integer
+                        example: 0
+                      created_at:
+                        description: 작성일
+                        type: string
+                        format: date-time
+                        example: 2024-05-20 15:02:52
+                      updated_at:
+                        description: 수정일
+                        type: string
+                        format: date-time
+                        example: 2024-05-21 18:26:28
+                      deleted_at:
+                        description: 삭제일
+                        type: string
+                        nullable: true
+                        example: null
   '400':
     description: 유효성 검사 에러
     content:

@@ -25,9 +25,8 @@ responses:
     headers:
       Set-Cookie:
         schema:
-          description: 리프래시 토큰
           type: string
-          example: eyJhbGciOiJzaGEyNTYiL...
+          example: refresh-token=eyJhbGciOiJzaGEyNTYiL...; path=/; HttpOnly
     content:
       application/json:
         schema:
@@ -66,7 +65,7 @@ responses:
                     role:
                       description: 권한
                       type: string
-                      example: NORMAL
+                      example: NOMAL
                     profile:
                       description: 프로필 사진
                       type: string
