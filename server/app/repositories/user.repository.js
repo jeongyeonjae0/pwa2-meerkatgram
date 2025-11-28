@@ -15,13 +15,11 @@ const { User } = db;
  */
 async function findByEmail(t = null, email) {
   // SELECT * FROM users WHERE email = ? AND deleted_at IS NULL;
-  return await User .findOne(
+  return await User.findOne(
     {
       where: {
         email: email
-      }
-    },
-    {
+      },
       transaction: t
     }
   );
