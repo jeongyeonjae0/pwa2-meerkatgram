@@ -132,7 +132,7 @@ button {
 
 /* 하트 관련 */
 .icon-heart-fill {
-  background-image: url('http://localhost:5173/icons/heart-fill.png');
+  background-image: url('/icons/heart-fill.png');
   width: 30px;
   height: 30px;
   background-position: center;
@@ -142,7 +142,7 @@ button {
 }
 
 .icon-heart-empty {
-  background-image: url('http://localhost:5173/icons/heart-empty.png');
+  background-image: url('/icons/heart-empty.png');
   width: 30px;
   height: 30px;
   background-position: center;
@@ -153,7 +153,7 @@ button {
 
 /* 삭제 아이콘 */
 .icon-delete {
-  background-image: url('http://localhost:5173/icons/btn-delete.png');
+  background-image: url('/icons/btn-delete.png');
   width: 25px;
   height: 30px;
   background-position: center;
