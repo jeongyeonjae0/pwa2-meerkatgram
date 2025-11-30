@@ -79,7 +79,12 @@ async function store(req, res, next) {
  */
 async function destroy(req, res, next) {
   try {
-    await postsService.destroy(req.params.id);
+    const data = {
+      userId: req.user.id,
+      postId: req.params.id
+    };
+
+    await postsService.destroy(data);
 
     return res.status(SUCCESS.status).send(createBaseResponse(SUCCESS));
   } catch(error) {
