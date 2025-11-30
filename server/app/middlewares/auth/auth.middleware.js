@@ -43,8 +43,11 @@ function authorize(req) {
     //   req.baseUrl,     // 프리픽스로 묶은 Path               , /api/auth
     //   req.path         // `baseUrl`을 제외한 Path           , /login
     // );
-    return item.path.test(`${req.baseUrl}${req.path}`);  
-  }); // 배열을 반환
+    
+    // express는 경우에 따라 가장 마지막에 `/`를 붙이는 경우도 있어서, 그럴 경우 가장 마지막 `/` 제거
+    const path = req.path.endsWith('/') ? req.path.slice(0, -1) : req.path;
+    return item.path.test(`${req.baseUrl}${path}`);
+  }); 
 
   // 일치하는 규칙이 있을 시, 인증 및 권한 체크를 실시
   if(matchRole) {
