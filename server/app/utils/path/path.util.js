@@ -12,6 +12,16 @@ function getViewDirPath() {
   return path.join(__dirname, 'index.html');
  }
 
+ function getPostsImagePath() {
+  return process.env.APP_MODE !== 'dev' ? process.env.FILE_POST_IMAGE_PATH : path.resolve(process.env.FILE_POST_IMAGE_PATH);
+}
+
+function getProfilesImagePath() {
+  return process.env.APP_MODE !== 'dev' ? process.env.FILE_USER_PROFILE_PATH : path.resolve(process.env.FILE_USER_PROFILE_PATH);
+}
+
  export default {
   getViewDirPath,
+  getPostsImagePath,
+  getProfilesImagePath,
  }

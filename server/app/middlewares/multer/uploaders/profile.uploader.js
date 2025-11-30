@@ -9,6 +9,7 @@ import fs from 'fs';
 import dayjs from 'dayjs';
 import myError from '../../../errors/customs/my.error.js';
 import { BAD_FILE_ERROR } from '../../../../configs/responseCode.config.js';
+import pathUtil from '../../../utils/path/path.util.js';
 
 /**
  * 프로필 이미지 업로더 처리 미들웨어
@@ -23,11 +24,12 @@ export default function(req, res, next) {
     storage: multer.diskStorage({
       // 파일 저장 경로 설정 
       destination(req, file, callback) {
+        const fullPath = pathUtil.getProfilesImagePath();
         // 저장 디렉토리 설정FILE_USER_PROFILE_SIZE
-        if(!fs.existsSync(process.env.FILE_USER_PROFILE_PATH)) {
+        if(!fs.existsSync(fullPath)) {
           // 해당 디렉토리 없으면 생성 처리
           fs.mkdirSync(
-            process.env.FILE_USER_PROFILE_PATH,
+            fullPath,
             {
               recursive: true, // 중간 디렉토리까지 모두 생성, 기본은 false
               mode: 0o755 // 권한 설정 rwxr-xr-x(문자열로 표현)
@@ -35,7 +37,7 @@ export default function(req, res, next) {
           );
         }
 
-        callback(null, process.env.FILE_USER_PROFILE_PATH);
+        callback(null, fullPath);
       },
       // 파일 명 설정
       filename(req, file, callback) {
