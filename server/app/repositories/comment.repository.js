@@ -5,7 +5,7 @@
  */
 
 import db from '../models/index.js';
-const {sequelize, Post, Like} = db;
+const {sequelize, Post, Comment} = db;
 
 /**
  * 게시글 삭제
@@ -14,7 +14,7 @@ const {sequelize, Post, Like} = db;
  * @returns {Promise<number>}
  */
 async function destroy(t = null, id) {
-  return await Like.destroy(
+  return await Comment.destroy(
     {
       where: { postId : id },
       transaction: t
