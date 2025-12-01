@@ -1,7 +1,7 @@
 /**
  * @file app/services/posts.service.type.js
  * @description posts Service Types
- * 251129 park init
+ * 251129 yeon init
  */
 
 /**

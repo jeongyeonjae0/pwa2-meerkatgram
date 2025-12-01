@@ -24,7 +24,7 @@ export default function(req, res, next) {
     storage: multer.diskStorage({
       // 파일 저장 경로 설정 
       destination(req, file, callback) {
-        const fullPath = pathUtil.getPostImagePath();
+        const fullPath = pathUtil.getPostsImagePath();
         // 저장 디렉토리 설정
         if(!fs.existsSync(fullPath)) {
           // 해당 디렉토리 없으면 생성 처리
