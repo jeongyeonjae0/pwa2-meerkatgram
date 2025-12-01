@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         element: <PostCreate />
       },
       {
-        path: '/posts/:id',
+        path: '/posts/show/:id',
         element: <PostShow />
       },
       {
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <Registration />
       },
       {
-        path: '/userinfo',
+        path: '/users/:id',
         element: <UserInfo />
       },
     ]
