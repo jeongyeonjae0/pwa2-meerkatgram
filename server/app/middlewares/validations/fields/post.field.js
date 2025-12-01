@@ -4,13 +4,13 @@
  * 251128 v1.0.0 yeon init 
  */
 
-import { body, param } from "express-validator";
+import { body, param, query } from "express-validator";
 import fs from 'fs';
 import pathUtil from "../../../utils/path/path.util.js";
 import path from "path";
 
 // 페이지 필드
-export const page = body('page')
+export const page = query('page')
   .trim()
   .optional()
   .isNumeric()
@@ -40,6 +40,7 @@ export const image = body('image')
   .withMessage('이미지는 필수 항목입니다.')
   .bail()
   .custom(val => {
+    // 우리 앱의 게시글 이미지에 접근하는 `도메인 + path`가 맞는지 확인
     if(!val.startsWith(`${process.env.APP_URL}${process.env.ACCESS_FILE_POST_IMAGE_PATH}`)) {
       return false;
     }
@@ -49,6 +50,7 @@ export const image = body('image')
   .withMessage('허용하지 않는 이미지 경로입니다.')
   .bail()
   .custom(val => {
+    // 실제 이미지 파일이 있는지 검증 처리
     const splitPath = val.split('/');
     const fullPath = path.join(pathUtil.getPostsImagePath(), splitPath[splitPath.length - 1]);
     console.log(fullPath);

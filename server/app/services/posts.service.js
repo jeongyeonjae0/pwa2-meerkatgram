@@ -37,11 +37,13 @@ async function show(id) {
 
 /**
  * 게시글 작성
- * @param {PostStoreData} data
  * @param {import("./posts.service.type.js").PostStoreData} data
+ * @param {Promise<Array<import("../models/Post.js").Post>>} 
  */
 async function create(data) {
-  return await postRepository.create(null, data);
+  return await db.sequelize.transaction(async t => {
+    return await postRepository.create(t, data);
+  });
 }
 
 /**
@@ -51,7 +53,7 @@ async function create(data) {
  */
 async function destroy({ userId, postId }) {
   // 트랜잭션 시작
-  return db.sequelize.transaction(async t => {
+  return await db.sequelize.transaction(async t => {
     // (게시글 작성자 일치 확인용)
     const post = await postRepository.findByPk(t, postId);
 
@@ -59,6 +61,7 @@ async function destroy({ userId, postId }) {
     if(post.userId !== userId) {
       throw myError('작성자 불일치', UNMATCHING_USER_ERROR);
     }
+    
     // 코멘트 삭제
     await commentRepository.destroy(t, postId);
 
