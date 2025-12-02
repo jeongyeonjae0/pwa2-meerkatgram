@@ -31,39 +31,54 @@ responses:
               type: string
               example: 정상 처리
             data:
-              type: array
-              items:
-                type: object
-                description: 게시글 정보
-                properties:
-                  id:
-                    description: PK
-                    type: integer
-                    example: 1
-                  title:
-                    description: 게시글 제목
-                    type: string
-                    example: 게시글 제목11
-                  content:
-                    description: 게시글 내용
-                    type: string
-                    example: 게시글 내용11
-                  image:
-                    description: 게시글 사진
-                    type: string
-                    example: http://localhost:3000/file/posts/we4h6se547h5dgb5yagb.png
-                  created_at:
-                    description: 작성일
-                    type: string
-                    example: '2024-05-20 15:02:52'
-                  updated_at:
-                    description: 수정일
-                    type: string
-                    example: '2024-05-21 18:26:28'
-                  deleted_at:
-                    description: 삭제일
-                    type: string
-                    example: null
+              type: object
+              properties:
+                page:
+                  type: string
+                  description: 현재 페이지
+                  example: 1
+                limit:
+                  type: integer
+                  description: 한페이지 표시 수
+                  example: 6
+                count:
+                  type: integer
+                  description: 총 레코드 수
+                  example: 109
+                posts:
+                  type: array
+                  items:
+                    type: object
+                    description: 게시글 정보
+                    properties:
+                      id:
+                        description: PK
+                        type: integer
+                        example: 1
+                      title:
+                        description: 게시글 제목
+                        type: string
+                        example: 게시글 제목11
+                      content:
+                        description: 게시글 내용
+                        type: string
+                        example: 게시글 내용11
+                      image:
+                        description: 게시글 사진
+                        type: string
+                        example: http://localhost:3000/file/posts/we4h6se547h5dgb5yagb.png
+                      created_at:
+                        description: 작성일
+                        type: string
+                        example: '2024-05-20 15:02:52'
+                      updated_at:
+                        description: 수정일
+                        type: string
+                        example: '2024-05-21 18:26:28'
+                      deleted_at:
+                        description: 삭제일
+                        type: string
+                        example: null
   '400':
     description: 유효성 검사 에러
     content:

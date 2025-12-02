@@ -17,6 +17,8 @@ requestBody:
     application/json:
       schema:
         type: object
+        required:
+          - content
         properties:
           content:
             description: 코멘트 내용

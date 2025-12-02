@@ -71,36 +71,95 @@ responses:
                 comments:
                   type: array
                   items:
-                    description: 코멘트 정보
                     type: object
+                    description: 코멘트 리스트
                     properties:
                       id:
                         description: PK
                         type: integer
                         example: 1
-                      content:
-                        description: 코멘트 내용
-                        type: string
-                        example: 코멘트 내용11
+                      userId:
+                        description: 유저 pk
+                        type: integer
+                        example: 1
+                      postId:
+                        description: 게시글 PK
+                        type: integer
+                        example: 1
                       replyId:
-                        description: 대댓글 번호
+                        description: 댓글 PK(대댓글용)
                         type: integer
                         example: 0
                       created_at:
                         description: 작성일
                         type: string
-                        format: date-time
-                        example: 2024-05-20 15:02:52
+                        example: '2024-05-20 15:02:52'
                       updated_at:
                         description: 수정일
                         type: string
-                        format: date-time
-                        example: 2024-05-21 18:26:28
+                        example: '2024-05-21 18:26:28'
                       deleted_at:
                         description: 삭제일
                         type: string
-                        nullable: true
                         example: null
+                      users:
+                        type: object
+                        description: 코멘트 작성 유저 정보
+                        properties:
+                          profile:
+                            description: 유저 사진
+                            type: string
+                            example: http://localhost:3000/file/profile/we4h6se547h5dgb5yagb.png
+                          nick:
+                            description: 유저 닉네임
+                            type: string
+                            example: Kanna_Kamui
+                      replies:
+                        type: array
+                        items:
+                          type: object
+                          description: 코멘트 리스트
+                          properties:
+                            id:
+                              description: PK
+                              type: integer
+                              example: 2
+                            userId:
+                              description: 유저 pk
+                              type: integer
+                              example: 2
+                            postId:
+                              description: 게시글 PK
+                              type: integer
+                              example: 1
+                            replyId:
+                              description: 댓글 PK(대댓글용)
+                              type: integer
+                              example: 1
+                            created_at:
+                              description: 작성일
+                              type: string
+                              example: '2024-05-20 15:02:52'
+                            updated_at:
+                              description: 수정일
+                              type: string
+                              example: '2024-05-21 18:26:28'
+                            deleted_at:
+                              description: 삭제일
+                              type: string
+                              example: null
+                            users:
+                              type: object
+                              description: 코멘트 작성 유저 정보
+                              properties:
+                                profile:
+                                  description: 유저 사진
+                                  type: string
+                                  example: http://localhost:3000/file/profile/we4h6se547h5dgb5yagb.png
+                                nick:
+                                  description: 유저 닉네임
+                                  type: string
+                                  example: Kanna_Kamui
   '400':
     description: 유효성 검사 에러
     content:

@@ -17,10 +17,11 @@ requestBody:
     multipart/form-data:
       schema:
         type: object
+        required:
+          - image
         properties:
           image:
             description: 이미지
-            type: string
             format: binary
 responses:
   '200':

@@ -13,11 +13,16 @@ parameters:
     description: 엑세스 토큰
 requestBody:
   description: 회원 가입 정보
-  required: true
   content:
     application/json:
       schema:
         type: object
+        required:
+          - email
+          - password
+          - passwordChk
+          - nick
+          - profile
         properties:
           email:
             description: 회원 아이디

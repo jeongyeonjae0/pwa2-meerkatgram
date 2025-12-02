@@ -5,11 +5,13 @@ description: 회원의 로그인 처리후 JWT 및 회원정보 반환
 operationId: 'auth-login'
 requestBody:
   description: 회원 로그인 정보
-  required: true
   content:
     application/json:
       schema:
         type: object
+        required:
+          - email
+          - password
         properties:
           email:
             description: 회원 아이디

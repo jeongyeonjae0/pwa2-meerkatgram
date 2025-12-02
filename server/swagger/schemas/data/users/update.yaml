@@ -17,9 +17,10 @@ requestBody:
     application/json:
       schema:
         type: object
+        required:
+          - password
         properties:
           password:
-            required: true
             description: 비밀번호
             type: string
             example: qwe123!@
