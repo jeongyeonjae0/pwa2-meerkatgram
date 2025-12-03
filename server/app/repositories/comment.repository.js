@@ -22,6 +22,11 @@ async function destroy(t = null, id) {
   );
 }
 
+async function create(t = null, data) {  // 저장하고 싶은 데이터 
+  return await Comment.create(data, { transaction: t });
+}
+
 export default {
   destroy,
+  create,
 }
