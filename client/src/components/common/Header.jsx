@@ -12,7 +12,7 @@ export default function Header() {
   const onlyTitleFlg = onlyTitleList.some(path => path === location.pathname);
 
   function redirecLogin() {
-    navigate(`/posts`);
+    navigate(`/login`);
   } 
 
   function redirectRegistration() {

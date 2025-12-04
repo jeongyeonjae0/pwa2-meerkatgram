@@ -4,12 +4,16 @@
  * 251120 yeon init
  */
 
+import axios from 'axios';
 import bcrypt from 'bcrypt';
 import userRepository from "../repositories/user.repository.js";
 import myError from '../errors/customs/my.error.js';
 import { NOT_REGISTERED_ERROR, REISSUE_ERROR } from '../../configs/responseCode.config.js';
 import jwtUtil from '../utils/jwt/jwt.util.js';
 import db from '../models/index.js';
+import socialKakaoUtil from '../utils/social/social.kakao.util.js';
+import PROVIDER from '../middlewares/auth/configs/provider.enum.js';
+import ROLE from '../middlewares/auth/configs/role.enum.js';
 
 /**
  * 로그인
@@ -91,8 +95,74 @@ async function reissue(token) {
   });
 }
 
+async function socialKakao(code) {
+  // 토큰 획득 요청에 필요한 헤더와 바디 작성
+  const tokenRequest = socialKakaoUtil.getTokenRequest(code);
+
+  // 토큰 획득 요청 
+  const resultToken = await axios.post(process.env.SOCIAL_KAKAO_API_URL_TOKEN, tokenRequest.searchParams, { headers: tokenRequest.headers });
+  const { access_token } = resultToken.data;
+
+  // 사용자 정보 획득 (카카오에서 주는)
+  const userRequest = socialKakaoUtil.getUserRequest(access_token);
+  const resultUser = await axios.post(
+    process.env.SOCIAL_KAKAO_API_URL_USER_INFO,
+    userRequest.searchParams,
+    { headers: userRequest.headers }
+  );
+
+  const kakaoId = resultUser.data.id; // response body 안에
+  const email = resultUser.data.kakao_account.email;
+  const profile = resultUser.data.kakao_account.profile.thumbnail_image_url;
+  const nick = resultUser.data.kakao_account.profile.nickname;
+
+  const refreshToken = db.sequelize.transaction(async t => {
+    // 가입한 회원인지 체크         
+    let user = await userRepository.findByEmail(t, email);
+    
+    if(!user) {
+      // 미가입 회원이면 회원 가입 처리
+      const data = {
+        email,
+        profile, // 카카오톡에서 설정한 프로필
+        nick,
+        password: bcrypt.hashSync(crypto.randomUUID(), 10),
+        provider: PROVIDER.KAKAO,
+        role:  ROLE.NORMAL
+      };
+
+      user = await userRepository.create(t, data);
+    } else {
+      // 프로바이더 확인하고 카카오 아니면 변경 
+      if(user.provider !== PROVIDER.KAKAO) {
+        user.provider = PROVIDER.KAKAO;
+      }
+    }
+  
+    // 우리 리프래시 토큰 생성
+    const refreshToken = jwtUtil.generateRefreshToken(user);
+  
+    // 리프래시 토큰 저장
+    user.refreshToken = refreshToken;
+    await userRepository.save(t, user);
+
+    return refreshToken;
+  });
+
+  // 카카오 로그아웃 처리
+  const logoutRequest = socialKakaoUtil.getLogoutRequest(kakaoId, access_token);
+  await axios.post(
+    process.env.SOCIAL_KAKAO_API_URL_LOGOUT,
+    logoutRequest.searchParams,
+    { headers: logoutRequest.headers }
+  );
+
+  return refreshToken;
+}
+
 
 export default {
   login,
   reissue,
+  socialKakao
 }
