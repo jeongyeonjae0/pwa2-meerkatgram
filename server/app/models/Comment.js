@@ -38,7 +38,7 @@ const attributes = {
     comment: '내용'
   },
   replyId: {
-    filed: 'reply_id',
+    field: 'reply_id',
     type: DataTypes.BIGINT.UNSIGNED,
     allowNull: false,
     comment: '대댓글 PK'
