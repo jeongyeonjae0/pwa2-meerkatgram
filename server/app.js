@@ -17,6 +17,7 @@ import notFoundRouter from './routes/notFound.router.js';
 import pathUtil from './app/utils/path/path.util.js';
 import cookieParser from 'cookie-parser';
 import commentsRouter from './routes/comments.router.js';
+import usersRouter from './routes/users.router.js';
 
 const app = express();
 app.use(express.json()); // JSON 요청 파싱 처리
@@ -43,6 +44,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/files', filesRouter);
 app.use('/api/comments', commentsRouter);
+app.use('/api/users', usersRouter);
 
 // ---------------------------
 // 404 처리 
