@@ -49,9 +49,37 @@ async function create(t = null, data) {
   return await User.create(data, { transaction: t});
 }
 
+async function logout(t = null, id) {
+  return await User.update(
+    {
+      refreshToken: null
+    },
+    {
+      where: {
+        id: id
+      },
+      transaction: t
+    }
+  );
+  // 특정 유저 리프래시토큰 null로 갱신 
+  // UPDATE users SET refresh_token = null, updated_at = NOW() WHERE id = ? 
+  //   const query = 
+  // 	' UPDATE users '          
+  // 	' SET '
+  // 	'	refresh_token = null '
+  // 	'	,updated_at = NOW() '    
+  // 	' WHERE '  
+  // 	'	id = ? '
+  //  ;
+  // const values = [id];
+
+  // db.sequelize.query({query, values});
+}
+
 export default {
   findByEmail,
   save,
   findByPk,
   create,
+  logout,
 }

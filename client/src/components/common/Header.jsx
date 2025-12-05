@@ -1,9 +1,12 @@
 import './Header.css';
 import { useLocation, useNavigate } from "react-router-dom";
 import UserInfo from './UserInfo.jsx';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutThunk } from '../../store/thunks/authThunk.js';
+import { clearAuth } from '../../store/slices/authSlice.js';
 
 export default function Header() {
+  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const { isLoggedIn } = useSelector(state => state.auth)
@@ -23,6 +26,20 @@ export default function Header() {
     navigate('/posts');
   }
 
+
+  async function logout() {
+    try {
+      navigate('/posts'); // History 남기는 여부 선택 하기
+      const result = await dispatch(logoutThunk());
+      if(result.type.endsWith('/rejected')) {
+        throw result.payload;
+      }
+      dispatch(clearAuth());
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <div className="header-container">
@@ -32,7 +49,7 @@ export default function Header() {
             !onlyTitleFlg && (
               <div className='header-top-btn-box'>
                 {
-                  (isLoggedIn && <button type="button" className='btn-small bg-dark'>Logout</button>)
+                  (isLoggedIn && <button type="button" onClick={logout} className='btn-small bg-dark' >Logout</button>)
                   ||
                   <>
                     <button type="button" onClick={redirecLogin} className='btn-small bg-gray'>Sign In</button>
