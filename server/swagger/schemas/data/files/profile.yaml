@@ -3,14 +3,6 @@ tags:
 summary: 프로필 이미지 업로드
 description: 프로필 이미지 업로드
 operationId: 'file-profile'
-parameters:
-  - in: header
-    name: Authorization
-    schema:
-      type: string
-      example: 'bearer eyJhbGciOiJzaGEyNTYiL...'
-    required: true
-    description: 엑세스 토큰
 requestBody:
   description: 이미지 업로드 정보
   content:
@@ -18,9 +10,9 @@ requestBody:
       schema:
         type: object
         required:
-          - image
+          - profile
         properties:
-          image:
+          profile:
             description: 이미지
             format: binary
 responses:
@@ -51,15 +43,6 @@ responses:
       application/json:
         schema:
           $ref: '../../errors/BadFile.yaml'
-  '401':
-    description: 권한 에러
-    content:
-      application/json:
-        schema:
-          oneOf:
-            - $ref: '../../errors/Unauthorized.yaml'
-            - $ref: '../../errors/ExpiredToken.yaml'
-            - $ref: '../../errors/InvalidToken.yaml'
   '500':
     description: DB 에러 및 시스템 에러
     content:

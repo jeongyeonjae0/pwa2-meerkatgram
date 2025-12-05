@@ -3,14 +3,6 @@ tags:
 summary: 작성
 description: 작성
 operationId: 'user-store'
-parameters:
-  - in: header
-    name: Authorization
-    schema:
-      type: string
-      example: 'bearer eyJhbGciOiJzaGEyNTYiL...'
-    required: true
-    description: 엑세스 토큰
 requestBody:
   description: 회원 가입 정보
   content:
