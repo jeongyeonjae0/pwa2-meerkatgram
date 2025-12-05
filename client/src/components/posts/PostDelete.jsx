@@ -1,6 +1,6 @@
 import './PostDelete.css';
 
-export default function PostDelete({setCloseDeleteModal}) {
+export default function PostDelete({id, setCloseDeleteModal}) {
   return (
     <>
       <div className="post-delete-container">

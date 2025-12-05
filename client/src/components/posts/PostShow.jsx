@@ -49,7 +49,7 @@ export default function PostsShow() {
       )
     }
     {
-      openDeleteFlg && <PostDelete setCloseDeleteModal={closeDeleteModal} />
+      openDeleteFlg && <PostDelete id={id} setCloseDeleteModal={closeDeleteModal} />
     }
     </>
   )
