@@ -9,6 +9,11 @@ export const postShowThunk = createAsyncThunk(
 
       const response = await axiosInstance.get(url);
 
+      // 상세 데이터가 없을 시 예외 발생
+      if(!response.data.data) {
+        throw new Error('삭제된 게시글');
+      }
+      
       return response.data; 
     } catch (error) {
       return rejectWithValue(error);    
