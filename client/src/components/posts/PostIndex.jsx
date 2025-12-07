@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './PostIndex.css';
 import { useEffect } from 'react';
 import { postIndexThunk } from '../../store/thunks/postIndexThunk.js';
-import { clearPostindex } from '../../store/slices/postIndexSlice.js';
+import { clearPostIndex } from '../../store/slices/postIndexSlice.js';
 
 export default function PostIndex() {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export default function PostIndex() {
     dispatch(postIndexThunk(page + 1));
 
     return () => {
-      dispatch(clearPostindex());
+      dispatch(clearPostIndex());
     }
   }, []);
 
