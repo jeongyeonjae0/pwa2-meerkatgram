@@ -28,10 +28,28 @@ const attributes = {
   },
   endpoint: {
     field: 'endpoint',
-    type: DataTypes.STRING(255),
+    type: DataTypes.STRING(500),
     allowNull: false,
     unique: true,
     comment: '앤드 포인트'
+  },
+  p256dh: {
+    field: 'p256dh',
+    type: DataTypes.STRING(255),
+    allowNull: false,
+    comment: '공개키',
+  },
+  auth: {
+    field: 'auth',
+    type: DataTypes.STRING(255),
+    allowNull: false,
+    comment: '인증키',
+  },
+  device: {
+    field: 'device',
+    type: DataTypes.STRING(500),
+    allowNull: false,
+    comment: '디바이스',
   },
   createdAt: {
     field: 'created_at',
