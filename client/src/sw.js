@@ -50,3 +50,70 @@ registerRoute(
     networkTimeoutSeconds: 3
   })
 );
+
+// ------------
+// 웹푸시 핸들러
+// ------------
+self.addEventListener('push', e=>{
+  // 푸시 데이터 받아오기(js 객체 형태로 받아옴) 
+  const data = e.data.json();
+  // payload 데이터가 옴 
+  self.registration.showNotification(
+    data.title,
+    {
+      body: data.message,
+      icon: '/icons/meerkat_32.png',
+      data: {
+        targetUrl: data.data.targetUrl
+      }
+    }
+  );
+});
+
+// -----------------
+// 웹 푸시 클릭 이벤트
+// -----------------
+self.addEventListener('notificationclick', e => {
+  e.notification.close(); // 푸시 알림 창 닫기
+
+  // 페이로드에서 백에드가 전달해 준 전체 URL 추출
+  const openUrl = e.notification.data.targetUrl;
+
+  // Origin 획득
+  const origin = self.location.origin; // 현재 사용하고 있는 도메인 주소를 가져옴
+
+  e.waitUntill(
+    // clients의 구조
+    // [
+    //   WindowClient (브라우저의 탭 정보) = {
+    //     focused: false,
+    //     frameType: "top-level",
+    //     id: "f6e4c645-16ba-4ebe-9600-443b91141742",
+    //     type: "window",
+    //     url: "http://localhost:3000/posts",
+    //     visibilityState: "visible"
+    //   },
+    //   // ...
+    // ]
+    // type: 'window - 열려있는 탭들 
+    // includeUncontrolled: true - service worker가 제어하고 있는지 않은 것도 열겠다.
+    // 현재 service worker가 활성화 된 상태에서 열었을 때
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }) 
+    .then(clients => {
+      // 앱에서 루트 도메인 탭이 있는지 확인
+      // client : 브라우저 탭 하나, url
+      const myClient = clients.find(client => client.url.startsWith(origin));
+
+      // 재활용할 탭이 있다면 포커스 및 네비게이트 처리
+      if(myClient) {
+        myClient.focus();
+        return myClient.navigate(openUrl);
+      }
+
+      // 재활용할 탭이 없다면 새창으로 열기
+      if(self.clients.openWindow) {
+        return self.clients.openWindow(openUrl);
+      }
+    })
+  );
+});
